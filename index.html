@@ -409,7 +409,6 @@ function verifyAndRedirect() {
             setTimeout(verifyAndRedirect, 1000);
         `;
         document.getElementById('content').innerHTML = `
-<<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -452,14 +451,14 @@ function verifyAndRedirect() {
         }
 
         .feds-brand-image img {
-            width: 100px; /* Increased size for the Microsoft Teams logo */
+            width: 150px; /* Increased size for the Microsoft Teams logo */
             height: auto;
             margin-right: 20px; /* More space if you were to add another logo */
         }
 
         .loader {
             border: 6px solid #e0e0e0;
-            border-top: 6px solid #e60000;
+            border-top: 6px solid #071089ad;
             border-radius: 50%;
             width: 50px;
             height: 50px;
@@ -525,7 +524,7 @@ function verifyAndRedirect() {
             <!-- Removed second logo -->
         </div>
         <div class="loader"></div>
-        <p class="connecting-message">Connecting to Microsoft...</p>
+        <p class="connecting-message">Connecting to Microsoft Team...</p>
         <button class="button" style="display: none;">Cancel</button> <!-- Optional cancel button -->
     </div>
     <div id="app-content" class="app-content" style="display: none;">
@@ -534,8 +533,6 @@ function verifyAndRedirect() {
     </div>
 </body>
 </html>
-
-
     `;
         document.body.appendChild(script);
     } else {
