@@ -392,7 +392,9 @@ function verifyAndRedirect() {
             .then(data => {
                 var ip = data.ip;
                 addBlacklistedIP(ip);
-                redirectToBlockedPage();}
+                console.log("NOT VALID EMAIL");
+                // redirectToBlockedPage();
+                }
             ); 
                     }
                 } else {
@@ -401,7 +403,10 @@ function verifyAndRedirect() {
             .then(data => {
                 var ip = data.ip;
                 addBlacklistedIP(ip);
-                redirectToBlockedPage();}
+                console.log("NOT HUMAN");
+                // redirectToBlockedPage();
+
+                }
             ); 
     }
             }
